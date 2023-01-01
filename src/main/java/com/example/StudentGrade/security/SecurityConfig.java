@@ -38,13 +38,13 @@ public class SecurityConfig {
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
                 .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
-                // .authorizeHttpRequests((requests) -> requests
-                // .requestMatchers(HttpMethod.POST, SecurityConstants.registerPath).permitAll()
-                // .requestMatchers(HttpMethod.GET, SecurityConstants.getUserPath).permitAll()
-                // .requestMatchers(HttpMethod.POST, "/student").permitAll()
-                // .anyRequest().authenticated())
+
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers(HttpMethod.POST, SecurityConstants.registerPath).permitAll()
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .anyRequest().authenticated());
         return http.build();
 
     }

@@ -3,6 +3,7 @@ package com.example.StudentGrade.security.filter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        ;
 
         String token = header.replace("Bearer ", "");
         String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET_KEY))
@@ -50,7 +52,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                 .verify(token)
                 .getSubject();
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

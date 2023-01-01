@@ -31,6 +31,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Autowired
     private CustomAuthenticationManager authenticationManager;
 
+    @Autowired
+    
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
@@ -60,13 +63,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
             Authentication authResult) throws IOException, ServletException {
+
+        
+
+
         String token = JWT.create()
                 .withSubject(authResult.getName())
                 .withExpiresAt(new Date(System.currentTimeMillis() +
                         SecurityConstants.TOKEN_EXPIRATION))
-                .withClaim("roles",
-                        authResult.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.toList()))
                 .sign(Algorithm.HMAC512(SecurityConstants.SECRET_KEY));
         response.addHeader("Authorization", "Bearer " + token);
 

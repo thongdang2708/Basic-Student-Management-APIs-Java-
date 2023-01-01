@@ -24,15 +24,10 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotBlank(message = "Role must not be blank")
-    @Column(name = "role", nullable = false)
-    private String role;
-
-    public User(Long id, String username, String password, String role) {
+    public User(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = role;
     }
 
     public User() {
@@ -60,14 +55,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRole() {
-        return this.role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.StudentGrade.exception.UserNotFoundWithName;
 
 import jakarta.servlet.FilterChain;
@@ -21,6 +22,10 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
 
+        } catch (JWTVerificationException ex) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Wrong token!");
+            response.getWriter().flush();
         } catch (UserNotFoundWithName ex) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.getWriter().write("Username does not exist!");
