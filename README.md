@@ -8,10 +8,11 @@ Image of Postman testing:
 
 Configuration with MySQL deployed to AWS:
 
-<img width="815" alt="image" src="https://user-images.githubusercontent.com/89829761/212524354-ed9d1227-6c13-429f-9ca0-c3d0ede78628.png">
+<img width="816" alt="image" src="https://user-images.githubusercontent.com/89829761/212754160-401702b5-de66-491d-8b0d-65c945be646c.png">
 
-Security config on AWS is set only with my current IP address (Can customize)
+To start, use mvn clean spring-boot:run
 
+Security config on AWS is set with all IPv4 addresses
 
 
 
