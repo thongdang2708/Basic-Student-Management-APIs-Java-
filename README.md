@@ -14,5 +14,9 @@ To start, use mvn clean spring-boot:run
 
 Security config on AWS is set with all IPv4 addresses
 
+In application.properties, there are several information to hide for security:
+spring.datasource.username=*****(hidden for security)
+spring.datasource.password=************(hidden for security)
+
 
 
